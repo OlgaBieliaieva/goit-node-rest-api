@@ -4,10 +4,15 @@ export const createContactSchema = Joi.object({
   name: Joi.string().required(),
   email: Joi.string().required(),
   phone: Joi.string().required(),
+  favorite: Joi.boolean().default(false).required(),
 });
 
 export const updateContactSchema = Joi.object({
   name: Joi.string(),
   email: Joi.string(),
   phone: Joi.string(),
+});
+
+export const updateStatusContactSchema = Joi.object({
+  favorite: Joi.boolean().default(false).required(),
 });
