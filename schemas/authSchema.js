@@ -1,15 +1,29 @@
 import Joi from "joi";
-import { emailRegExp } from "../constants/authConstants.js";
+import {
+  emailRegExp,
+  passwordRegExp,
+  subscriptionPlanList,
+} from "../constants/authConstants.js";
 
-export const authSignupSchema = Joi.object({
-  password: Joi.string().min(6).required(),
-  email: Joi.string().pattern(emailRegExp).required(),
-  subscription: Joi.string().default("starter"),
-  token: Joi.string().default(null),
+export const authSchema = Joi.object({
+  password: Joi.string()
+    .pattern(passwordRegExp)
+    .message(
+      "Password must have at least 8 characters, one capital letter and one number"
+    )
+    .required(),
+  email: Joi.string()
+    .pattern(emailRegExp)
+    .message("Email failed format")
+    .required(),
 });
 
-export const authSignInSchema = Joi.object({
-  password: Joi.string().min(6).required(),
-  email: Joi.string().pattern(emailRegExp).required(),
-  token: Joi.string().default(null),
+export const userSubscriptionUpdateSchema = Joi.object({
+  email: Joi.string()
+    .pattern(emailRegExp)
+    .message("Email failed format")
+    .required(),
+  subscription: Joi.string()
+    .valid(...subscriptionPlanList)
+    .default("starter"),
 });
