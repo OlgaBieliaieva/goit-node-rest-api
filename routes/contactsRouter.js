@@ -33,6 +33,7 @@ contactsRouter.post(
 
 contactsRouter.put(
   "/:id",
+  isValidId,
   isEmptyBody,
   validateBody(updateContactSchema),
   updateContact
@@ -40,6 +41,7 @@ contactsRouter.put(
 
 contactsRouter.patch(
   "/:id/favorite",
+  isValidId,
   isEmptyBody,
   validateBody(updateStatusContactSchema),
   updateStatusContact
