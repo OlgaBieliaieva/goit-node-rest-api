@@ -14,8 +14,10 @@ export const register = async (req, res, next) => {
     const newUser = await authService.saveUser(req.body);
 
     res.status(201).json({
-      email: newUser.email,
-      subscription: newUser.subscription,
+      user: {
+        email: newUser.email,
+        subscription: newUser.subscription,
+      },
     });
   } catch (error) {
     next(error);
