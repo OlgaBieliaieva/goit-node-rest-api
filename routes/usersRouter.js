@@ -24,7 +24,7 @@ usersRouter.post("/login", isEmptyBody, validateBody(authSchema), login);
 usersRouter.get("/current", authenticate, getCurrent);
 
 usersRouter.post("/logout", authenticate, logout);
-usersRouter.post(
+usersRouter.patch(
   "/",
   authenticate,
   isEmptyBody,
