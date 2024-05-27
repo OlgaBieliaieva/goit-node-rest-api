@@ -10,6 +10,7 @@ import {
 import isEmptyBody from "../middlewares/isEmptyBody.js";
 import isValidId from "../middlewares/isValidId.js";
 import validateBody from "../helpers/validateBody.js";
+import authenticate from "../middlewares/authenticate.js";
 import {
   createContactSchema,
   updateContactSchema,
@@ -17,6 +18,8 @@ import {
 } from "../schemas/contactsSchemas.js";
 
 const contactsRouter = express.Router();
+
+contactsRouter.use(authenticate);
 
 contactsRouter.get("/", getAllContacts);
 
