@@ -9,3 +9,5 @@ export const saveUser = async (data) => {
 };
 
 export const updateUser = (filter, data) => User.findOneAndUpdate(filter, data);
+
+
