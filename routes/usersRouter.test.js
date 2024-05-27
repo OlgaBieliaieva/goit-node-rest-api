@@ -33,6 +33,7 @@ describe("test api/users/login", () => {
 
     expect(statusCode).toBe(200);
     expect(body).toHaveProperty("token");
+    expect(body.token).not.toBeNull();
     expect(body).toHaveProperty("user");
     expect(body.user).toHaveProperty("email");
     expect(body.user).toHaveProperty("subscription");
@@ -40,7 +41,8 @@ describe("test api/users/login", () => {
     expect(typeof body.user.subscription === "string").toBeTruthy();
 
     const user = await findUser({ email: loginData.email });
-    expect(user.token).not.toBeNull();
     expect(user.email).toBe(loginData.email);
+    expect(user.token).toBe(body.token);
+    expect(user.subscription).toBe(body.user.subscription);
   });
 });
