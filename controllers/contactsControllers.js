@@ -3,9 +3,9 @@ import HttpError from "../helpers/HttpError.js";
 
 export const getAllContacts = async (req, res, next) => {
   try {
-    const { page = 1, limit = 20, favorite } = req.query;
+    const { page = 1, limit = 20, ...params } = req.query;
     const { _id: owner } = req.user;
-    const filter = { owner, favorite };
+    const filter = { owner, ...params };
     const fields = "-createdAt -updatedAt";
     const skip = (page - 1) * limit;
     const settings = { skip, limit };
