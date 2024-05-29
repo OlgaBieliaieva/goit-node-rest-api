@@ -27,3 +27,13 @@ export const userSubscriptionUpdateSchema = Joi.object({
     .valid(...subscriptionPlanList)
     .default("starter"),
 });
+
+export const emailVerifySchema = Joi.object({
+  email: Joi.string()
+    .pattern(emailRegExp)
+    .required()
+    .messages({
+      pattern: "Email failed format",
+      required: "Missing required field email",
+    }),
+});

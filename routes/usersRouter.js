@@ -1,6 +1,8 @@
 import express from "express";
 import {
   register,
+  verifyEmail,
+  resendVerify,
   login,
   getCurrent,
   logout,
@@ -15,17 +17,28 @@ import upload from "../middlewares/upload.js";
 import {
   authSchema,
   userSubscriptionUpdateSchema,
+  emailVerifySchema,
 } from "../schemas/authSchema.js";
 
 const usersRouter = express.Router();
 
 usersRouter.post("/register", isEmptyBody, validateBody(authSchema), register);
 
+usersRouter.get("/verify/:verificationToken", verifyEmail);
+
+usersRouter.post(
+  "/verify",
+  isEmptyBody,
+  validateBody(emailVerifySchema),
+  resendVerify
+);
+
 usersRouter.post("/login", isEmptyBody, validateBody(authSchema), login);
 
 usersRouter.get("/current", authenticate, getCurrent);
 
 usersRouter.post("/logout", authenticate, logout);
+
 usersRouter.patch(
   "/",
   authenticate,
@@ -33,6 +46,7 @@ usersRouter.patch(
   validateBody(userSubscriptionUpdateSchema),
   subscriptionUpdate
 );
+
 usersRouter.patch(
   "/avatars",
   authenticate,
