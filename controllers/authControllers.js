@@ -20,8 +20,10 @@ export const register = async (req, res, next) => {
     const newUser = await authService.saveUser({ ...req.body, avatarURL });
 
     res.status(201).json({
-      email: newUser.email,
-      subscription: newUser.subscription,
+      user: {
+        email: newUser.email,
+        subscription: newUser.subscription,
+      },
     });
   } catch (error) {
     next(error);
@@ -98,6 +100,7 @@ export const subscriptionUpdate = async (req, res, next) => {
 
 export const avatarUpdate = async (req, res, next) => {
   try {
+    
     const { _id } = req.user;
     const { path: oldPath, filename } = req.file;
     const newPath = path.join(avatarPath, filename);

@@ -36,6 +36,7 @@ usersRouter.patch(
 usersRouter.patch(
   "/avatars",
   authenticate,
+  isEmptyBody,
   upload.single("avatar"),
   avatarUpdate
 );

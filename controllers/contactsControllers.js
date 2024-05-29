@@ -3,7 +3,7 @@ import HttpError from "../helpers/HttpError.js";
 
 export const getAllContacts = async (req, res, next) => {
   try {
-    const { page = 1, limit = 20, favorite = true } = req.query;
+    const { page = 1, limit = 20, favorite } = req.query;
     const { _id: owner } = req.user;
     const filter = { owner, favorite };
     const fields = "-createdAt -updatedAt";
