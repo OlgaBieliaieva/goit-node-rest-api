@@ -5,10 +5,12 @@ import {
   getCurrent,
   logout,
   subscriptionUpdate,
+  avatarUpdate,
 } from "../controllers/authControllers.js";
 import isEmptyBody from "../middlewares/isEmptyBody.js";
 import validateBody from "../helpers/validateBody.js";
 import authenticate from "../middlewares/authenticate.js";
+import upload from "../middlewares/upload.js";
 
 import {
   authSchema,
@@ -30,6 +32,13 @@ usersRouter.patch(
   isEmptyBody,
   validateBody(userSubscriptionUpdateSchema),
   subscriptionUpdate
+);
+usersRouter.patch(
+  "/avatars",
+  authenticate,
+  isEmptyBody,
+  upload.single("avatar"),
+  avatarUpdate
 );
 
 export default usersRouter;
