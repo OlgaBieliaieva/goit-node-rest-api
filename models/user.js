@@ -19,12 +19,21 @@ const userSchema = new Schema(
       match: emailRegExp,
       unique: true,
     },
+    avatarURL: String,
     subscription: {
       type: String,
       enum: subscriptionPlanList,
       default: "starter",
     },
     token: {
+      type: String,
+      default: null,
+    },
+    verify: {
+      type: Boolean,
+      default: false,
+    },
+    verificationToken: {
       type: String,
       default: null,
     },
